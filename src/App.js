@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Route, Switch, useHistory, Redirect } from "react-router-dom";
+import { AppContext } from './context/AppContext'
+import Home from './components/Home';
 
-function App() {
+
+const App = () => {
 
   const [companyData, setCompanyData] = useState(require('./assets/data/Companies.json'))
   const [guestData, setGuestData] = useState(require('./assets/data/Guests.json'))
-  
+
   return (
-    <h1>Hello world!</h1>
+    <BrowserRouter>
+      <AppContext.Provider value={{companyData, guestData}}>
+        <Home />
+      </AppContext.Provider>
+    </BrowserRouter>
   );
 }
 
