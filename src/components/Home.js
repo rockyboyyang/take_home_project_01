@@ -4,8 +4,6 @@ import { AppContext } from '../context/AppContext'
 const Home = () => {
     const { companyData, guestData } = useContext(AppContext)
 
-    console.log(companyData, guestData)
-    
     const messagePlaceholder = {
         'firstName': null,
         'lastName': null,
@@ -13,8 +11,30 @@ const Home = () => {
         'message': null,
     }
 
+    const displayGuestCompany = (e) => {
+        let company = document.getElementById('companies')
+        let guest = document.getElementById('guests')
+
+        console.log(company.value, guest.value)
+    }
+
     return (
-        <h1>Hello Worlds</h1>
+        <>
+            <label for="guests">Choose a guest</label>
+            <select name="guests" id="guests">
+                {guestData.map((guest) => (
+                    <option key={guest.id}>{guest.firstName} {guest.lastName}</option>
+                ))}
+            </select>
+            <br></br>
+            <label for="companies">Choose a company</label>
+            <select name="companies" id="companies">
+                {companyData.map((company) => (
+                    <option key={company.id}>{company.company}</option>
+                ))}
+            </select>
+            <button onClick={displayGuestCompany}>Generate Message</button>
+        </>
     );
 
 }
